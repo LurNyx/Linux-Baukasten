@@ -17,7 +17,11 @@ def main() -> int:
     for did in catalog.DESKTOPS:
         r = Recipe(name=f"desktop-{did}", desktop=did, features=[])
         (out / f"desktop-{did}.baukasten.json").write_bytes(r.to_json().encode("utf-8"))
-    print(f"{len(catalog.DESKTOPS)} Rezepte in {out}")
+    # Testrezept: Wegwerf-System mit serieller Konsole, damit sich der Amnesic-Waechter in einer VM automatisch pruefen laesst
+    t = catalog.recipe_from_preset("tails-like", name="tails-serial")
+    t.extra_boot_params = ["console=tty0", "console=ttyS0,115200n8"]
+    (out / "test-tails-serial.baukasten.json").write_bytes(t.to_json().encode("utf-8"))
+    print(f"{len(catalog.DESKTOPS) + 1} Rezepte in {out}")
     return 0
 
 

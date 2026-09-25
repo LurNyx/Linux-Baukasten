@@ -1,0 +1,29 @@
+{
+  "name": "tails-serial",
+  "base": "debian",
+  "suite": "trixie",
+  "desktop": "xfce-lean",
+  "features": [
+    "amnesic-full",
+    "hardened-boot",
+    "mac-randomization",
+    "firewall-ufw",
+    "sysctl-hardening",
+    "privacy-tools",
+    "crypto-tools",
+    "browser-firefox",
+    "tor-browser",
+    "fonts"
+  ],
+  "extra_packages": [],
+  "extra_boot_params": [
+    "console=tty0",
+    "console=ttyS0,115200n8"
+  ],
+  "locale": "de_DE.UTF-8",
+  "keyboard": "de",
+  "timezone": "Europe/Berlin",
+  "hostname": "baukasten",
+  "username": "user",
+  "schema": 1
+}
