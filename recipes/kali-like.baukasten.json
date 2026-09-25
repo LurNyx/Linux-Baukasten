@@ -2,7 +2,7 @@
   "name": "kali-like",
   "base": "debian",
   "suite": "trixie",
-  "desktop": "xfce",
+  "desktop": "xfce-lean",
   "features": [
     "pentest-network",
     "pentest-web",

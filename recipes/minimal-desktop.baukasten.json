@@ -2,7 +2,7 @@
   "name": "minimal-desktop",
   "base": "debian",
   "suite": "trixie",
-  "desktop": "lxqt",
+  "desktop": "lxqt-lean",
   "features": [
     "browser-firefox",
     "zram",

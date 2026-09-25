@@ -26,7 +26,7 @@ class Recipe:
     name: str = "Mein-Linux"
     base: str = "debian"
     suite: str = "trixie"
-    desktop: str = "xfce"
+    desktop: str = "xfce-lean"
     features: list = field(default_factory=list)
     extra_packages: list = field(default_factory=list)
     extra_boot_params: list = field(default_factory=list)

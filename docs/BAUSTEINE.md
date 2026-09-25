@@ -8,27 +8,33 @@ Die Größenangaben sind grobe Schätzungen (± 30 %). Jedes Paket wurde gegen d
 
 | Vorlage | Desktop | Beschreibung |
 |---|---|---|
-| **Wegwerf-System (Tails-artig)** (`tails-like`) | Xfce | Startet von USB, speichert nichts; Stick abziehen = alles weg. Mit Firewall, Härtung und Privatsphäre-Werkzeugen. |
-| **Sicherheits-Werkzeugkasten (Kali-artig)** (`kali-like`) | Xfce | Netzwerk-, Web-, WLAN-, Passwort- und Forensik-Werkzeuge auf einem Live-Stick, optional installierbar. |
-| **Alltags-System (Ubuntu/Mint-artig)** (`daily`) | Cinnamon | Browser, Büro, Multimedia, Drucken, Flatpak, Installer - ein freundliches Komplettsystem. |
-| **Rettungssystem (SystemRescue-artig)** (`rescue`) | LXQt | Datenträger retten, Windows reparieren, Hardware prüfen - lädt komplett ins RAM. |
-| **Entwickler-Arbeitsplatz** (`developer`) | KDE Plasma | Compiler, Python, Node, Java, Go/Rust, Container, Flatpak - installierbar. |
-| **Gaming-Live-System** (`gaming`) | Xfce | Freie Spiele, Wine, Lutris, GameMode und Vulkan auf einem Stick. |
+| **Wegwerf-System (Tails-artig)** (`tails-like`) | Xfce (schlank) | Startet von USB, speichert nichts; Stick abziehen = alles weg. Mit Firewall, Härtung und Privatsphäre-Werkzeugen. |
+| **Sicherheits-Werkzeugkasten (Kali-artig)** (`kali-like`) | Xfce (schlank) | Netzwerk-, Web-, WLAN-, Passwort- und Forensik-Werkzeuge auf einem Live-Stick, optional installierbar. |
+| **Alltags-System (Ubuntu/Mint-artig)** (`daily`) | Cinnamon (schlank) | Browser, Büro, Multimedia, Drucken, Flatpak, Installer - ein freundliches Komplettsystem. |
+| **Rettungssystem (SystemRescue-artig)** (`rescue`) | LXQt (schlank) | Datenträger retten, Windows reparieren, Hardware prüfen - lädt komplett ins RAM. |
+| **Entwickler-Arbeitsplatz** (`developer`) | KDE Plasma (schlank) | Compiler, Python, Node, Java, Go/Rust, Container, Flatpak - installierbar. |
+| **Gaming-Live-System** (`gaming`) | Xfce (schlank) | Freie Spiele, Wine, Lutris, GameMode und Vulkan auf einem Stick. |
 | **Minimaler Server (Live, Konsole)** (`server`) | Kein Desktop (nur Konsole) | Kein Desktop: SSH nur mit Schlüssel, Firewall, Fail2ban, Überwachung - klein und schnell. |
-| **Leichtes System für alte Rechner** (`minimal-desktop`) | LXQt | LXQt, Firefox, komprimierter RAM - läuft auch mit 2 GB Arbeitsspeicher. |
+| **Leichtes System für alte Rechner** (`minimal-desktop`) | LXQt (schlank) | LXQt, Firefox, komprimierter RAM - läuft auch mit 2 GB Arbeitsspeicher. |
 
 ## Desktops
 
 | Desktop | ca. Größe | Beschreibung |
 |---|---|---|
 | **Kein Desktop (nur Konsole)** (`none`) | +0.0 GB | Klein und schnell: Server, Rettungssystem, Basteln im Terminal. |
-| **Xfce** (`xfce`) | +0.6 GB | Leicht, schnell, klassisch - guter Standard für USB-Sticks und ältere Rechner. |
-| **GNOME** (`gnome`) | +1.5 GB | Modern und aufgeräumt, wie bei Fedora oder Ubuntu. Größer und braucht mehr RAM. |
-| **KDE Plasma** (`kde`) | +1.6 GB | Sehr anpassbar, Windows-ähnliche Bedienung. Groß, aber komfortabel. |
-| **LXQt** (`lxqt`) | +0.5 GB | Sehr leicht und schlank - für alte oder schwache Hardware. |
-| **MATE** (`mate`) | +0.9 GB | Klassischer Desktop im Stil von GNOME 2 - vertraut und stabil. |
-| **Cinnamon** (`cinnamon`) | +1.0 GB | Der Desktop von Linux Mint: vertraut, komfortabel, mittelschwer. |
+| **Xfce (schlank)** (`xfce-lean`) | +0.5 GB | Leicht, schnell, klassisch - der beste Standard für USB-Sticks und ältere Rechner. Nur der Desktop, Programme wählst du bei den Bausteinen. |
+| **LXQt (schlank)** (`lxqt-lean`) | +0.4 GB | Sehr leicht - für alte oder schwache Hardware (ab ca. 1 GB RAM). |
+| **MATE (schlank)** (`mate-lean`) | +0.6 GB | Klassischer Desktop im Stil von GNOME 2 - vertraut und stabil. |
+| **Cinnamon (schlank)** (`cinnamon-lean`) | +0.7 GB | Der Desktop von Linux Mint: vertraut und komfortabel. |
+| **GNOME (schlank)** (`gnome-lean`) | +1.3 GB | Modern und aufgeräumt, wie bei Fedora oder Ubuntu. Braucht mehr RAM (ab ca. 3 GB). |
+| **KDE Plasma (schlank)** (`kde-lean`) | +1.5 GB | Sehr anpassbar, Windows-ähnliche Bedienung. Groß, aber komfortabel (ab ca. 3 GB RAM). |
 | **i3 (Tiling)** (`i3`) | +0.3 GB | Tastaturgesteuerte Kachel-Oberfläche für Fortgeschrittene, extrem schlank. |
+| **Xfce (komplett)** (`xfce`) | +2.1 GB | Xfce mit Debians Standard-Ausstattung: Büro-Programme, Browser, Sprachpakete u. a. sind schon dabei. |
+| **LXQt (komplett)** (`lxqt`) | +2.1 GB | LXQt mit Debians Standard-Ausstattung (Büro, Browser ...) - deutlich größer als die schlanke Variante. |
+| **MATE (komplett)** (`mate`) | +2.2 GB | MATE mit Debians Standard-Ausstattung (Büro, Browser ...). |
+| **Cinnamon (komplett)** (`cinnamon`) | +2.3 GB | Cinnamon mit Debians Standard-Ausstattung (Büro, Browser ...). |
+| **GNOME (komplett)** (`gnome`) | +2.5 GB | GNOME mit Debians Standard-Ausstattung (Büro, Browser ...). Groß und braucht mehr RAM. |
+| **KDE Plasma (komplett)** (`kde`) | +2.7 GB | KDE mit Debians Standard-Ausstattung (Büro, Browser ...). Sehr groß. |
 
 ## Live-System (Verhalten des USB-Sticks)
 

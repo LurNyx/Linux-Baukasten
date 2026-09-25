@@ -2,7 +2,7 @@
   "name": "daily",
   "base": "debian",
   "suite": "trixie",
-  "desktop": "cinnamon",
+  "desktop": "cinnamon-lean",
   "features": [
     "browser-firefox",
     "mail",

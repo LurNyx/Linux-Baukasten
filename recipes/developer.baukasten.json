@@ -2,7 +2,7 @@
   "name": "developer",
   "base": "debian",
   "suite": "trixie",
-  "desktop": "kde",
+  "desktop": "kde-lean",
   "features": [
     "dev-base",
     "dev-python",

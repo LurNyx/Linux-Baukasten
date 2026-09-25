@@ -1,16 +1,9 @@
 {
-  "name": "gaming",
+  "name": "desktop-i3",
   "base": "debian",
   "suite": "trixie",
-  "desktop": "xfce-lean",
-  "features": [
-    "games-foss",
-    "gaming-tools",
-    "multimedia",
-    "firmware-nonfree",
-    "flatpak",
-    "browser-firefox"
-  ],
+  "desktop": "i3",
+  "features": [],
   "extra_packages": [],
   "extra_boot_params": [],
   "locale": "de_DE.UTF-8",

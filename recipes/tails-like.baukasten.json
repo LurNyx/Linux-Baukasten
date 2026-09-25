@@ -2,7 +2,7 @@
   "name": "tails-like",
   "base": "debian",
   "suite": "trixie",
-  "desktop": "xfce",
+  "desktop": "xfce-lean",
   "features": [
     "amnesic-full",
     "hardened-boot",

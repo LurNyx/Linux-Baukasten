@@ -197,13 +197,21 @@ class App(tk.Tk):
     # ---- Tab 2: Desktop
     def _tab_desktop(self, page):
         ttk.Label(page, text="Wie soll die Oberfläche aussehen?", style="Cat.TLabel").pack(anchor="w")
-        ttk.Label(page, text="Größenangaben sind grobe Schätzungen für die fertige ISO.", style="Desc.TLabel").pack(anchor="w", pady=(0, 8))
+        ttk.Label(page, text="\"Schlank\" bringt nur den Desktop mit (Programme wählst du bei den Bausteinen). \"Komplett\" ist Debians "
+                             "Standard-Ausstattung mit Büro-Programmen u. a. und macht die ISO gut 2 GB größer. Größen sind grobe Schätzungen.",
+                  style="Desc.TLabel", wraplength=900, justify="left").pack(anchor="w", pady=(0, 8))
+        sf = ScrollFrame(page)
+        sf.pack(fill="both", expand=True)
+        labels = []
         for did, d in catalog.DESKTOPS.items():
-            row = ttk.Frame(page)
+            row = ttk.Frame(sf.inner)
             row.pack(fill="x", pady=3)
             ttk.Radiobutton(row, text=f"{d['title']}   (ca. +{d['size_mb'] / 1024:.1f} GB)", value=did,
                             variable=self.v_desktop).pack(anchor="w")
-            ttk.Label(row, text=d["desc"], style="Desc.TLabel", wraplength=800, justify="left").pack(anchor="w", padx=24)
+            lbl = ttk.Label(row, text=d["desc"], style="Desc.TLabel", wraplength=800, justify="left")
+            lbl.pack(anchor="w", padx=24)
+            labels.append(lbl)
+        sf.on_width = lambda w: [lb.configure(wraplength=max(300, w - 70)) for lb in labels]
 
     # ---- Tab 3: Bausteine
     def _tab_features(self, page):
@@ -338,7 +346,7 @@ class App(tk.Tk):
             self.v_timezone.set(r.timezone)
             self.v_hostname.set(r.hostname)
             self.v_username.set(r.username)
-            self.v_desktop.set(r.desktop if r.desktop in catalog.DESKTOPS else "xfce")
+            self.v_desktop.set(r.desktop if r.desktop in catalog.DESKTOPS else "xfce-lean")
             self.v_boot.set(" ".join(r.extra_boot_params))
             self.txt_pk.delete("1.0", "end")
             self.txt_pk.insert("1.0", " ".join(r.extra_packages))
