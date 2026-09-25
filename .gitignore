@@ -8,3 +8,5 @@ dist/
 tools/.cache/
 .vscode/
 .idea/
+tools/hyperv/*.log
+tools/hyperv/vmshots/

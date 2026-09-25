@@ -38,7 +38,8 @@ GNOME 3,0 GB · KDE 3,0 GB (komplett). Ein erster Durchlauf mit Debians komplett
 
 ## 3. Start einer selbst gebauten ISO (Hyper-V-VM, UEFI, Secure Boot aus)
 
-Geprüft mit der Vorlage **tails-like** (plus serielle Konsole), geschrieben mit dem Roh-Schreiber aus [Kali Amnesic Stick](https://github.com/LurNyx/kali-amnesic-stick):
+Geprüft mit der Vorlage **tails-like** (plus serielle Konsole, Rezept `tools/calibration/test-tails-serial.baukasten.json`), geschrieben mit dem Roh-Schreiber aus
+[Kali Amnesic Stick](https://github.com/LurNyx/kali-amnesic-stick). Nachvollziehbar mit `tools/hyperv/verify_iso.py` (Administrator, Hyper-V; Anleitung im Kopf der Datei):
 
 - Das Bootmenü startet **von selbst** nach 10 s (Login-Prompt nach 53 s; ohne diese Einstellung wartete es unbegrenzt auf Enter – im VM-Test aufgefallen und behoben)
 - Debian GNU/Linux 13 (trixie), Rechnername `baukasten`, deutsche Oberfläche, 1218 Pakete, Desktop (lightdm) und Firewall (ufw) aktiv, MAC-Zufall-Datei vorhanden
