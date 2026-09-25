@@ -4,9 +4,9 @@
 in dem du ein Basissystem, einen Desktop und beliebige **Bausteine** auswählst – und daraus eine startbare **ISO** bekommst:
 als **Live-System für den USB-Stick**, mit **Installer**, als **Rettungssystem**, **Wegwerf-System** und vieles mehr.
 
-> ⚠️ **Alpha (Version 0.1).** Der Katalog und der Projekt-Generator sind getestet, die Paketnamen sind gegen das echte Debian-Archiv geprüft.
-> Ob der komplette ISO-Bau für *jede* Kombination durchläuft, wird gerade mit echten Testläufen belegt – siehe [Teststand](#teststand-ehrlich).
-> English: [README.en.md](README.en.md).
+> ⚠️ **Alpha (Version 0.1).** Der Katalog und der Projekt-Generator sind getestet, die Paketnamen sind gegen das echte Debian-Archiv geprüft, alle 8 Vorlagen
+> wurden **wirklich zu ISOs gebaut**, und das Wegwerf-System wurde in einer VM gestartet (Stick abziehen → aus). Auf echter Hardware ist es noch nicht getestet –
+> siehe [Teststand](#teststand-ehrlich). English: [README.en.md](README.en.md).
 
 ![Bausteine auswählen](docs/screenshots/3-bausteine.png)
 
@@ -77,11 +77,15 @@ Generator für jede Vorlage inkl. Shell-Syntaxprüfung aller erzeugten Skripte, 
 **Alle Paketnamen** werden gegen das Debian-Archiv (13 „trixie") geprüft (`python tools/check_packages.py`) – dabei sind schon Fehler aufgefallen
 und behoben (`kismet`, `radare2`, `task-english-desktop` gibt es dort nicht; `nikto` und `lutris` liegen in non-free/contrib).
 
-**Echter ISO-Bau:** der Workflow [„ISO bauen (echter Test)"](.github/workflows/build-iso.yml) baut eine ISO in Docker (Debian 13). Aktueller Stand
-siehe [Actions](https://github.com/LurNyx/Linux-Baukasten/actions) und [docs/TESTSTAND.md](docs/TESTSTAND.md).
+**Echter ISO-Bau:** der Workflow [„ISO bauen (echter Test)"](.github/workflows/build-iso.yml) baut Vorlagen komplett in Docker (Debian 13, live-build).
+**Alle 8 Vorlagen bauen erfolgreich durch** (0,7 bis 4,3 GB große ISOs). Die Größen-Schätzung im Programm ist an diese echten Werte angepasst.
 
-**Nicht geprüft:** Start der gebauten ISOs auf echter Hardware (auch nicht Secure Boot), Installer (Calamares), Persistenz, der Amnesic-Wächter in
-einem selbst gebauten System, der „ISO bauen"-Knopf mit WSL/Docker unter Windows. Berichte sind sehr willkommen (Issues).
+**Echter Start:** Die Vorlage „Wegwerf-System" wurde als selbst gebaute ISO in einer Hyper-V-VM gestartet: Das Bootmenü startet von selbst, das System
+kommt mit Desktop und Firewall hoch, der **Amnesic-Wächter läuft, und beim „Stick abziehen" (Platte aus der VM entfernt) ist die VM nach ca. 8 Sekunden aus.**
+Die Einzelheiten samt aufgefallener und behobener Fehler stehen in [docs/TESTSTAND.md](docs/TESTSTAND.md).
+
+**Nicht geprüft:** Start auf echter Hardware und mit Secure Boot, der Start der übrigen Vorlagen (gebaut, aber nicht gebootet), Installer (Calamares),
+Persistenz, der „ISO bauen"-Knopf mit WSL/Docker unter Windows. Berichte sind sehr willkommen (Issues).
 
 ## Roadmap
 

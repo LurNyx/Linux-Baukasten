@@ -35,35 +35,35 @@ DESKTOPS = {
                   "Nur der Desktop, Programme wählst du bei den Bausteinen.",
                   "packages": ("xorg", "lightdm", "lightdm-gtk-greeter", "xfce4", "xfce4-terminal", "thunar", "mousepad",
                                "xfce4-pulseaudio-plugin", "network-manager-gnome", "gvfs", "xdg-user-dirs", "desktop-base") + _AUDIO,
-                  "size_mb": 500},
+                  "size_mb": 400},
     "lxqt-lean": {"title": "LXQt (schlank)", "desc": "Sehr leicht - für alte oder schwache Hardware (ab ca. 1 GB RAM).",
                   "packages": ("xorg", "sddm", "lxqt-core", "qterminal", "featherpad", "pcmanfm-qt", "lximage-qt", "nm-tray",
-                               "gvfs", "xdg-user-dirs", "desktop-base") + _AUDIO, "size_mb": 450},
+                               "gvfs", "xdg-user-dirs", "desktop-base") + _AUDIO, "size_mb": 1400},
     "mate-lean": {"title": "MATE (schlank)", "desc": "Klassischer Desktop im Stil von GNOME 2 - vertraut und stabil.",
                   "packages": ("xorg", "lightdm", "lightdm-gtk-greeter", "mate-desktop-environment-core", "mate-terminal", "pluma",
-                               "network-manager-gnome", "gvfs", "xdg-user-dirs", "desktop-base") + _AUDIO, "size_mb": 600},
+                               "network-manager-gnome", "gvfs", "xdg-user-dirs", "desktop-base") + _AUDIO, "size_mb": 500},
     "cinnamon-lean": {"title": "Cinnamon (schlank)", "desc": "Der Desktop von Linux Mint: vertraut und komfortabel.",
                       "packages": ("xorg", "lightdm", "lightdm-gtk-greeter", "cinnamon-core", "gnome-terminal", "nemo",
-                                   "network-manager-gnome", "gvfs", "xdg-user-dirs", "desktop-base") + _AUDIO, "size_mb": 700},
+                                   "network-manager-gnome", "gvfs", "xdg-user-dirs", "desktop-base") + _AUDIO, "size_mb": 600},
     "gnome-lean": {"title": "GNOME (schlank)", "desc": "Modern und aufgeräumt, wie bei Fedora oder Ubuntu. Braucht mehr RAM (ab ca. 3 GB).",
-                   "packages": ("gnome-core", "gdm3", "network-manager-gnome", "xdg-user-dirs", "desktop-base"), "size_mb": 1300},
+                   "packages": ("gnome-core", "gdm3", "network-manager-gnome", "xdg-user-dirs", "desktop-base"), "size_mb": 800},
     "kde-lean": {"title": "KDE Plasma (schlank)", "desc": "Sehr anpassbar, Windows-ähnliche Bedienung. Groß, aber komfortabel (ab ca. 3 GB RAM).",
                  "packages": ("xorg", "sddm", "kde-plasma-desktop", "plasma-nm", "konsole", "dolphin", "kate", "xdg-user-dirs",
-                              "desktop-base") + _AUDIO, "size_mb": 1500},
+                              "desktop-base") + _AUDIO, "size_mb": 1300},
     "i3": {"title": "i3 (Tiling)", "desc": "Tastaturgesteuerte Kachel-Oberfläche für Fortgeschrittene, extrem schlank.",
-           "packages": ("xorg", "lightdm", "i3", "i3status", "dmenu", "rxvt-unicode", "network-manager-gnome") + _AUDIO, "size_mb": 350},
+           "packages": ("xorg", "lightdm", "i3", "i3status", "dmenu", "rxvt-unicode", "network-manager-gnome") + _AUDIO, "size_mb": 500},
     "xfce": {"title": "Xfce (komplett)", "desc": "Xfce mit Debians Standard-Ausstattung: Büro-Programme, Browser, Sprachpakete u. a. sind schon dabei.",
              "packages": ("live-task-xfce", "task-xfce-desktop"), "size_mb": 2100},
     "lxqt": {"title": "LXQt (komplett)", "desc": "LXQt mit Debians Standard-Ausstattung (Büro, Browser ...) - deutlich größer als die schlanke Variante.",
-             "packages": ("live-task-lxqt", "task-lxqt-desktop"), "size_mb": 2200},
+             "packages": ("live-task-lxqt", "task-lxqt-desktop"), "size_mb": 1900},
     "mate": {"title": "MATE (komplett)", "desc": "MATE mit Debians Standard-Ausstattung (Büro, Browser ...).",
-             "packages": ("live-task-mate", "task-mate-desktop"), "size_mb": 2300},
+             "packages": ("live-task-mate", "task-mate-desktop"), "size_mb": 2100},
     "cinnamon": {"title": "Cinnamon (komplett)", "desc": "Cinnamon mit Debians Standard-Ausstattung (Büro, Browser ...).",
-                 "packages": ("live-task-cinnamon", "task-cinnamon-desktop"), "size_mb": 2400},
+                 "packages": ("live-task-cinnamon", "task-cinnamon-desktop"), "size_mb": 2200},
     "gnome": {"title": "GNOME (komplett)", "desc": "GNOME mit Debians Standard-Ausstattung (Büro, Browser ...). Groß und braucht mehr RAM.",
-              "packages": ("live-task-gnome", "task-gnome-desktop"), "size_mb": 2600},
+              "packages": ("live-task-gnome", "task-gnome-desktop"), "size_mb": 2400},
     "kde": {"title": "KDE Plasma (komplett)", "desc": "KDE mit Debians Standard-Ausstattung (Büro, Browser ...). Sehr groß.",
-            "packages": ("live-task-kde", "task-kde-desktop"), "size_mb": 2800},
+            "packages": ("live-task-kde", "task-kde-desktop"), "size_mb": 2400},
 }
 
 # Für Englisch gibt es kein task-english-desktop (per Archiv-Prüfung festgestellt)
@@ -220,7 +220,8 @@ FEATURES_LIST = [
       hooks=(("0510-ufw", _sh("sed -i 's/^ENABLED=.*/ENABLED=yes/' /etc/ufw/ufw.conf", "systemctl enable ufw.service")),), size_mb=3),
     F("sysctl-hardening", "security", "Kernel-Härtung (sysctl)",
       "Schaltet unsichere Netzwerk- und Kernel-Funktionen ab (Weiterleitungen, ICMP-Umleitungen, ptrace, unprivilegiertes BPF ...).",
-      files=(("/etc/sysctl.d/99-baukasten-hardening.conf", SYSCTL_HARDENING, False),), size_mb=0),
+      packages=("procps",),          # das Kommando "sysctl" fehlte im schlanken System (echter VM-Test)
+      files=(("/etc/sysctl.d/99-baukasten-hardening.conf", SYSCTL_HARDENING, False),), size_mb=1),
     F("mac-randomization", "security", "Zufällige MAC-Adresse (WLAN/LAN)",
       "Der Rechner meldet sich im Netz mit wechselnden Hardware-Adressen an - schwerer wiederzuerkennen.",
       packages=("network-manager",), files=(("/etc/NetworkManager/conf.d/00-baukasten-mac-random.conf", NM_MAC_RANDOM, False),),
@@ -508,7 +509,7 @@ def needs_non_free(r: Recipe) -> bool:
 
 def estimate_size_mb(r: Recipe) -> int:
     """Grobe Schätzung der ISO-Größe (nur zur Orientierung, +/- 30 %)."""
-    total = 520 + DESKTOPS[r.desktop]["size_mb"]
+    total = 600 + DESKTOPS[r.desktop]["size_mb"]
     for i in resolve_features(r.features):
         total += FEATURES[i].size_mb
     return total + 8 * len(r.extra_packages)

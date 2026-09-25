@@ -4,8 +4,9 @@
 a desktop and any number of **building blocks** – and get a bootable **ISO**: a **live system for a USB stick**, with an **installer**, a **rescue system**, a
 **disposable (Tails-like) system** and more. The interface is in German.
 
-> ⚠️ **Alpha (0.1).** The catalog and the project generator are tested and every package name is verified against the real Debian archive. End-to-end ISO
-> builds are being proven with real CI runs – see [Test status](#test-status-honest). German main README: [README.md](README.md).
+> ⚠️ **Alpha (0.1).** The catalog and the project generator are tested, every package name is verified against the real Debian archive, all 8 presets were **really built into
+> ISOs**, and the disposable system was booted in a VM (pull the stick → power off). Not tested on real hardware yet – see [Test status](#test-status-honest).
+> German main README: [README.md](README.md).
 
 ## What you can build
 
@@ -38,9 +39,13 @@ A build needs **15 GB free disk**, **4 GB RAM**, internet and **20–60 minutes*
 including a shell syntax check of all generated scripts, build commands and cancellation, the GUI (real Tk), generated docs. **All package names** are checked against the Debian 13
 archive (`python tools/check_packages.py`) – this already caught real mistakes (`kismet`, `radare2` and `task-english-desktop` don't exist there; `nikto`/`lutris` live in non-free/contrib).
 
-**Real ISO build:** the workflow [“ISO bauen (echter Test)”](.github/workflows/build-iso.yml) builds an ISO in Docker (Debian 13); see [Actions](https://github.com/LurNyx/Linux-Baukasten/actions) and [docs/TESTSTAND.md](docs/TESTSTAND.md).
+**Real ISO builds:** the workflow [“ISO bauen (echter Test)”](.github/workflows/build-iso.yml) builds presets completely in Docker (Debian 13, live-build). **All 8 presets build successfully**
+(0.7 to 4.3 GB ISOs); the size estimate in the program is calibrated on these real numbers.
 
-**Not verified:** booting built ISOs on real hardware (including Secure Boot), the installer (Calamares), persistence, the amnesic watcher inside a self-built system, and the "ISO bauen" button with WSL/Docker on Windows.
+**Real boot:** the "disposable system" preset was booted as a self-built ISO in a Hyper-V VM: the boot menu starts by itself, the system comes up with desktop and firewall, the **amnesic
+watcher runs, and when the disk is removed from the VM ("pull the stick") the VM is powered off after about 8 seconds.** Details, including the mistakes this found and fixed: [docs/TESTSTAND.md](docs/TESTSTAND.md) (German).
+
+**Not verified:** booting on real hardware or with Secure Boot, booting the other presets (built, but not booted), the installer (Calamares), persistence, and the "ISO bauen" button with WSL/Docker on Windows.
 Reports are very welcome (issues).
 
 ## Roadmap

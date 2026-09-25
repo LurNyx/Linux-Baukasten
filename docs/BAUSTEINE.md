@@ -22,19 +22,19 @@ Die Größenangaben sind grobe Schätzungen (± 30 %). Jedes Paket wurde gegen d
 | Desktop | ca. Größe | Beschreibung |
 |---|---|---|
 | **Kein Desktop (nur Konsole)** (`none`) | +0.0 GB | Klein und schnell: Server, Rettungssystem, Basteln im Terminal. |
-| **Xfce (schlank)** (`xfce-lean`) | +0.5 GB | Leicht, schnell, klassisch - der beste Standard für USB-Sticks und ältere Rechner. Nur der Desktop, Programme wählst du bei den Bausteinen. |
-| **LXQt (schlank)** (`lxqt-lean`) | +0.4 GB | Sehr leicht - für alte oder schwache Hardware (ab ca. 1 GB RAM). |
-| **MATE (schlank)** (`mate-lean`) | +0.6 GB | Klassischer Desktop im Stil von GNOME 2 - vertraut und stabil. |
-| **Cinnamon (schlank)** (`cinnamon-lean`) | +0.7 GB | Der Desktop von Linux Mint: vertraut und komfortabel. |
-| **GNOME (schlank)** (`gnome-lean`) | +1.3 GB | Modern und aufgeräumt, wie bei Fedora oder Ubuntu. Braucht mehr RAM (ab ca. 3 GB). |
-| **KDE Plasma (schlank)** (`kde-lean`) | +1.5 GB | Sehr anpassbar, Windows-ähnliche Bedienung. Groß, aber komfortabel (ab ca. 3 GB RAM). |
-| **i3 (Tiling)** (`i3`) | +0.3 GB | Tastaturgesteuerte Kachel-Oberfläche für Fortgeschrittene, extrem schlank. |
+| **Xfce (schlank)** (`xfce-lean`) | +0.4 GB | Leicht, schnell, klassisch - der beste Standard für USB-Sticks und ältere Rechner. Nur der Desktop, Programme wählst du bei den Bausteinen. |
+| **LXQt (schlank)** (`lxqt-lean`) | +1.4 GB | Sehr leicht - für alte oder schwache Hardware (ab ca. 1 GB RAM). |
+| **MATE (schlank)** (`mate-lean`) | +0.5 GB | Klassischer Desktop im Stil von GNOME 2 - vertraut und stabil. |
+| **Cinnamon (schlank)** (`cinnamon-lean`) | +0.6 GB | Der Desktop von Linux Mint: vertraut und komfortabel. |
+| **GNOME (schlank)** (`gnome-lean`) | +0.8 GB | Modern und aufgeräumt, wie bei Fedora oder Ubuntu. Braucht mehr RAM (ab ca. 3 GB). |
+| **KDE Plasma (schlank)** (`kde-lean`) | +1.3 GB | Sehr anpassbar, Windows-ähnliche Bedienung. Groß, aber komfortabel (ab ca. 3 GB RAM). |
+| **i3 (Tiling)** (`i3`) | +0.5 GB | Tastaturgesteuerte Kachel-Oberfläche für Fortgeschrittene, extrem schlank. |
 | **Xfce (komplett)** (`xfce`) | +2.1 GB | Xfce mit Debians Standard-Ausstattung: Büro-Programme, Browser, Sprachpakete u. a. sind schon dabei. |
-| **LXQt (komplett)** (`lxqt`) | +2.1 GB | LXQt mit Debians Standard-Ausstattung (Büro, Browser ...) - deutlich größer als die schlanke Variante. |
-| **MATE (komplett)** (`mate`) | +2.2 GB | MATE mit Debians Standard-Ausstattung (Büro, Browser ...). |
-| **Cinnamon (komplett)** (`cinnamon`) | +2.3 GB | Cinnamon mit Debians Standard-Ausstattung (Büro, Browser ...). |
-| **GNOME (komplett)** (`gnome`) | +2.5 GB | GNOME mit Debians Standard-Ausstattung (Büro, Browser ...). Groß und braucht mehr RAM. |
-| **KDE Plasma (komplett)** (`kde`) | +2.7 GB | KDE mit Debians Standard-Ausstattung (Büro, Browser ...). Sehr groß. |
+| **LXQt (komplett)** (`lxqt`) | +1.9 GB | LXQt mit Debians Standard-Ausstattung (Büro, Browser ...) - deutlich größer als die schlanke Variante. |
+| **MATE (komplett)** (`mate`) | +2.1 GB | MATE mit Debians Standard-Ausstattung (Büro, Browser ...). |
+| **Cinnamon (komplett)** (`cinnamon`) | +2.1 GB | Cinnamon mit Debians Standard-Ausstattung (Büro, Browser ...). |
+| **GNOME (komplett)** (`gnome`) | +2.3 GB | GNOME mit Debians Standard-Ausstattung (Büro, Browser ...). Groß und braucht mehr RAM. |
+| **KDE Plasma (komplett)** (`kde`) | +2.3 GB | KDE mit Debians Standard-Ausstattung (Büro, Browser ...). Sehr groß. |
 
 ## Live-System (Verhalten des USB-Sticks)
 
@@ -59,7 +59,7 @@ Die Größenangaben sind grobe Schätzungen (± 30 %). Jedes Paket wurde gegen d
 | Baustein | Was er macht | ca. Größe | Hinweise |
 |---|---|---|---|
 | **Firewall (ufw) aktiv** (`firewall-ufw`) | Eingehende Verbindungen werden standardmäßig blockiert, ausgehende erlaubt. | 3 MB |  |
-| **Kernel-Härtung (sysctl)** (`sysctl-hardening`) | Schaltet unsichere Netzwerk- und Kernel-Funktionen ab (Weiterleitungen, ICMP-Umleitungen, ptrace, unprivilegiertes BPF ...). | 0 MB |  |
+| **Kernel-Härtung (sysctl)** (`sysctl-hardening`) | Schaltet unsichere Netzwerk- und Kernel-Funktionen ab (Weiterleitungen, ICMP-Umleitungen, ptrace, unprivilegiertes BPF ...). | 1 MB |  |
 | **Zufällige MAC-Adresse (WLAN/LAN)** (`mac-randomization`) | Der Rechner meldet sich im Netz mit wechselnden Hardware-Adressen an - schwerer wiederzuerkennen. | 1 MB |  |
 | **AppArmor (Programme einsperren)** (`apparmor`) | Mandatory-Access-Control mit vorbereiteten Profilen. | 12 MB |  |
 | **Tor und Tor Browser** (`tor-browser`) | Tor-Dienst, torsocks und der Tor-Browser-Starter (lädt den Browser beim ersten Start). | 25 MB | braucht Desktop; contrib/non-free; Anonymität hängt vom gesamten Verhalten ab - das ist kein Tails-Ersatz. |
