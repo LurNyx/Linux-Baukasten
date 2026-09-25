@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       preset:
-        description: "Vorlage (server, rescue, tails-like, kali-like, daily, developer, gaming, minimal-desktop)"
+        description: "Vorlage (server, rescue, tails-like, kali-like, daily, developer, gaming, minimal-desktop) oder Pfad einer Rezept-Datei"
         default: "server"
         required: true
 
@@ -20,6 +20,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Artefakt-Name (Pfad/Schrägstriche sind im Namen nicht erlaubt)
+        id: n
+        run: echo "name=$(basename "${{ inputs.preset }}" .baukasten.json)" >> "$GITHUB_OUTPUT"
       - name: Projekt aus der Vorlage erzeugen
         run: python Linux-Baukasten.pyw --export "${{ inputs.preset }}" --out "$RUNNER_TEMP/proj"
       - name: Platz schaffen
@@ -43,7 +46,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: iso-${{ inputs.preset }}
+          name: iso-${{ steps.n.outputs.name }}
           path: |
             ${{ runner.temp }}/proj/*.iso
             ${{ runner.temp }}/proj/build.log
