@@ -1,0 +1,25 @@
+{
+  "name": "rescue",
+  "base": "debian",
+  "suite": "trixie",
+  "desktop": "lxqt",
+  "features": [
+    "rescue-disk",
+    "rescue-windows",
+    "hardware-diagnose",
+    "pentest-forensics",
+    "toram",
+    "ssh-server",
+    "zram",
+    "firmware-nonfree",
+    "browser-firefox"
+  ],
+  "extra_packages": [],
+  "extra_boot_params": [],
+  "locale": "de_DE.UTF-8",
+  "keyboard": "de",
+  "timezone": "Europe/Berlin",
+  "hostname": "baukasten",
+  "username": "user",
+  "schema": 1
+}

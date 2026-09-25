@@ -1,0 +1,27 @@
+{
+  "name": "kali-like",
+  "base": "debian",
+  "suite": "trixie",
+  "desktop": "xfce",
+  "features": [
+    "pentest-network",
+    "pentest-web",
+    "pentest-wireless",
+    "pentest-passwords",
+    "pentest-forensics",
+    "pentest-reverse",
+    "dev-python",
+    "persistence",
+    "installer-calamares",
+    "firmware-nonfree",
+    "browser-firefox"
+  ],
+  "extra_packages": [],
+  "extra_boot_params": [],
+  "locale": "de_DE.UTF-8",
+  "keyboard": "de",
+  "timezone": "Europe/Berlin",
+  "hostname": "baukasten",
+  "username": "user",
+  "schema": 1
+}

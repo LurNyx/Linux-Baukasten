@@ -1,0 +1,28 @@
+{
+  "name": "developer",
+  "base": "debian",
+  "suite": "trixie",
+  "desktop": "kde",
+  "features": [
+    "dev-base",
+    "dev-python",
+    "dev-web",
+    "dev-java",
+    "dev-go-rust",
+    "containers",
+    "editor-geany",
+    "flatpak",
+    "browser-firefox",
+    "installer-calamares",
+    "firmware-nonfree",
+    "fonts"
+  ],
+  "extra_packages": [],
+  "extra_boot_params": [],
+  "locale": "de_DE.UTF-8",
+  "keyboard": "de",
+  "timezone": "Europe/Berlin",
+  "hostname": "baukasten",
+  "username": "user",
+  "schema": 1
+}

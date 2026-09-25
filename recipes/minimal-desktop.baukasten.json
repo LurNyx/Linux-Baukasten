@@ -1,0 +1,21 @@
+{
+  "name": "minimal-desktop",
+  "base": "debian",
+  "suite": "trixie",
+  "desktop": "lxqt",
+  "features": [
+    "browser-firefox",
+    "zram",
+    "firmware-nonfree",
+    "printing",
+    "installer-calamares"
+  ],
+  "extra_packages": [],
+  "extra_boot_params": [],
+  "locale": "de_DE.UTF-8",
+  "keyboard": "de",
+  "timezone": "Europe/Berlin",
+  "hostname": "baukasten",
+  "username": "user",
+  "schema": 1
+}

@@ -1,0 +1,50 @@
+name: ISO bauen (echter Test)
+
+# Baut aus einer Vorlage wirklich eine ISO (live-build in Docker, Debian 13) - der Ende-zu-Ende-Beweis für den Generator.
+# Start: Reiter "Actions" -> "ISO bauen (echter Test)" -> "Run workflow". Die ISO gibt es danach als Artefakt (3 Tage).
+
+on:
+  workflow_dispatch:
+    inputs:
+      preset:
+        description: "Vorlage (server, rescue, tails-like, kali-like, daily, developer, gaming, minimal-desktop)"
+        default: "server"
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Projekt aus der Vorlage erzeugen
+        run: python Linux-Baukasten.pyw --export "${{ inputs.preset }}" --out "$RUNNER_TEMP/proj"
+      - name: Platz schaffen
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android /opt/hostedtoolcache/CodeQL || true
+          df -h /
+      - name: ISO bauen (Docker, Debian 13 trixie)
+        run: |
+          docker run --rm --privileged -v "$RUNNER_TEMP/proj:/work" debian:trixie sh -c '
+            cp -a /work /build && cd /build
+            rc=0
+            sh ./build.sh || rc=$?
+            cp -v /build/build.log /work/ || true
+            cp -v /build/*.iso /work/ || true
+            exit $rc'
+      - name: Ergebnis
+        if: always()
+        run: |
+          sudo chown -R "$USER" "$RUNNER_TEMP/proj" || true
+          ls -lh "$RUNNER_TEMP/proj"/*.iso "$RUNNER_TEMP/proj/build.log" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: iso-${{ inputs.preset }}
+          path: |
+            ${{ runner.temp }}/proj/*.iso
+            ${{ runner.temp }}/proj/build.log
+          retention-days: 3

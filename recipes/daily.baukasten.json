@@ -1,0 +1,29 @@
+{
+  "name": "daily",
+  "base": "debian",
+  "suite": "trixie",
+  "desktop": "cinnamon",
+  "features": [
+    "browser-firefox",
+    "mail",
+    "office",
+    "multimedia",
+    "graphics",
+    "printing",
+    "bluetooth",
+    "flatpak",
+    "installer-calamares",
+    "firmware-nonfree",
+    "fonts",
+    "timeshift",
+    "firewall-ufw"
+  ],
+  "extra_packages": [],
+  "extra_boot_params": [],
+  "locale": "de_DE.UTF-8",
+  "keyboard": "de",
+  "timezone": "Europe/Berlin",
+  "hostname": "baukasten",
+  "username": "user",
+  "schema": 1
+}

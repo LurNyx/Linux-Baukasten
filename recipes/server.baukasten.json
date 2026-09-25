@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "base": "debian",
+  "suite": "trixie",
+  "desktop": "none",
+  "features": [
+    "ssh-server",
+    "firewall-ufw",
+    "fail2ban",
+    "sysctl-hardening",
+    "monitoring",
+    "installer-debian",
+    "avahi"
+  ],
+  "extra_packages": [],
+  "extra_boot_params": [],
+  "locale": "de_DE.UTF-8",
+  "keyboard": "de",
+  "timezone": "Europe/Berlin",
+  "hostname": "baukasten",
+  "username": "user",
+  "schema": 1
+}

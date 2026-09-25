@@ -1,0 +1,22 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Kern-Tests (Rezept, Katalog, Generator, Bau-Befehle)
+        run: python tests/test_core.py
+      - name: Weitere Tests (Oberfläche wenn Bildschirm da, Doku, Debian-Paketnamen)
+        run: python tests/test_extra.py

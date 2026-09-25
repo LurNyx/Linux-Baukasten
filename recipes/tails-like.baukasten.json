@@ -1,0 +1,26 @@
+{
+  "name": "tails-like",
+  "base": "debian",
+  "suite": "trixie",
+  "desktop": "xfce",
+  "features": [
+    "amnesic-full",
+    "hardened-boot",
+    "mac-randomization",
+    "firewall-ufw",
+    "sysctl-hardening",
+    "privacy-tools",
+    "crypto-tools",
+    "browser-firefox",
+    "tor-browser",
+    "fonts"
+  ],
+  "extra_packages": [],
+  "extra_boot_params": [],
+  "locale": "de_DE.UTF-8",
+  "keyboard": "de",
+  "timezone": "Europe/Berlin",
+  "hostname": "baukasten",
+  "username": "user",
+  "schema": 1
+}
