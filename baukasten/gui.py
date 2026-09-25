@@ -100,13 +100,14 @@ class App(tk.Tk):
         self.v_username = tk.StringVar()
         self.v_desktop = tk.StringVar()
         self.v_boot = tk.StringVar()
+        self.v_timeout = tk.StringVar()
         self.v_preset = tk.StringVar()
         self.v_search = tk.StringVar()
         self.v_backend = tk.StringVar()
         self.v_outdir = tk.StringVar(value=str(default_out_root()))
         self.v_feat = {f.id: tk.BooleanVar(value=False) for f in catalog.FEATURES_LIST}
         for v in (self.v_name, self.v_suite, self.v_locale, self.v_keyboard, self.v_timezone, self.v_hostname, self.v_username,
-                  self.v_desktop, self.v_boot):
+                  self.v_desktop, self.v_boot, self.v_timeout):
             v.trace_add("write", lambda *_: self._changed())
         for fid, v in self.v_feat.items():
             v.trace_add("write", lambda *_a, fid=fid: self._feature_changed(fid))
@@ -274,6 +275,11 @@ class App(tk.Tk):
         self.txt_pk.bind("<KeyRelease>", lambda e: self._changed())
         ttk.Label(page, text="Zusätzliche Kernel-Parameter (Fortgeschrittene, z. B. nomodeset):", style="Desc.TLabel").pack(anchor="w", pady=(12, 2))
         ttk.Entry(page, textvariable=self.v_boot).pack(fill="x")
+        row = ttk.Frame(page)
+        row.pack(fill="x", pady=(14, 0))
+        ttk.Label(row, text="Bootmenü: automatisch starten nach").pack(side="left")
+        ttk.Spinbox(row, from_=0, to=300, width=5, textvariable=self.v_timeout).pack(side="left", padx=6)
+        ttk.Label(row, text="Sekunden   (0 = auf Enter warten)", style="Desc.TLabel").pack(side="left")
         ttk.Label(page, text="Tipp: Paketnamen findest du auf packages.debian.org. Nicht existierende Namen lassen den Bau scheitern.",
                   style="Desc.TLabel").pack(anchor="w", pady=(12, 0))
 
@@ -333,7 +339,8 @@ class App(tk.Tk):
                       extra_boot_params=split_words(self.v_boot.get()),
                       locale=self.v_locale.get().split()[0] if self.v_locale.get().split() else "",
                       keyboard=self.v_keyboard.get().strip(), timezone=self.v_timezone.get().strip(),
-                      hostname=self.v_hostname.get().strip(), username=self.v_username.get().strip())
+                      hostname=self.v_hostname.get().strip(), username=self.v_username.get().strip(),
+                      boot_timeout=int(self.v_timeout.get()) if self.v_timeout.get().strip().isdigit() else -1)
 
     def apply_recipe(self, r: Recipe):
         self._loading = True
@@ -348,6 +355,7 @@ class App(tk.Tk):
             self.v_username.set(r.username)
             self.v_desktop.set(r.desktop if r.desktop in catalog.DESKTOPS else "xfce-lean")
             self.v_boot.set(" ".join(r.extra_boot_params))
+            self.v_timeout.set(str(r.boot_timeout))
             self.txt_pk.delete("1.0", "end")
             self.txt_pk.insert("1.0", " ".join(r.extra_packages))
             for fid, v in self.v_feat.items():

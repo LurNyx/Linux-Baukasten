@@ -38,6 +38,30 @@ jobs:
             cp -v /build/build.log /work/ || true
             cp -v /build/*.iso /work/ || true
             exit $rc'
+      - name: Bootmenü in der fertigen ISO prüfen
+        run: |
+          sudo apt-get install -y p7zip-full >/dev/null
+          iso=$(ls "$RUNNER_TEMP"/proj/*.iso | head -n1)
+          python - "$iso" "$RUNNER_TEMP/proj/REZEPT.json" <<'PY'
+          import json, subprocess, sys
+          iso, recipe = sys.argv[1], json.load(open(sys.argv[2], encoding="utf-8"))
+          def extract(path):
+              return subprocess.run(["7z", "e", "-so", iso, path], capture_output=True, text=True).stdout
+          grub, iso_cfg, grubcfg = extract("boot/grub/config.cfg"), extract("isolinux/isolinux.cfg"), extract("boot/grub/grub.cfg")
+          t = recipe["boot_timeout"]
+          print("== boot/grub/config.cfg (Anfang)\n" + "\n".join(grub.splitlines()[:4]))
+          print("== isolinux/isolinux.cfg\n" + iso_cfg)
+          entry = [l for l in grubcfg.splitlines() if l.strip().startswith("linux")][:1]
+          print("== erster Menüeintrag (grub.cfg)\n" + "\n".join(entry))
+          if t:
+              assert f"set timeout={t}" in grub, "GRUB-Wartezeit fehlt in der ISO"
+              assert f"timeout {t * 10}" in iso_cfg, "isolinux-Wartezeit fehlt in der ISO"
+          for p in ("amnesic",) if "amnesic-full" in recipe["features"] else ():
+              assert any(p in l.split() for l in entry), "amnesic fehlt im Menüeintrag"
+          for p in recipe["extra_boot_params"]:
+              assert any(p in l.split() for l in entry), f"{p} fehlt im Menüeintrag"
+          print("Bootmenü OK")
+          PY
       - name: Ergebnis
         if: always()
         run: |

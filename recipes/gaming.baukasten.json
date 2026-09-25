@@ -18,5 +18,6 @@
   "timezone": "Europe/Berlin",
   "hostname": "baukasten",
   "username": "user",
+  "boot_timeout": 10,
   "schema": 1
 }

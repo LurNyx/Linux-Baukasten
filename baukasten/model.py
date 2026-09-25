@@ -35,6 +35,7 @@ class Recipe:
     timezone: str = "Europe/Berlin"
     hostname: str = "baukasten"
     username: str = "user"
+    boot_timeout: int = 10        # Sekunden bis zum automatischen Start im Bootmenü; 0 = auf Eingabe warten
     schema: int = SCHEMA
 
     # ---- Speichern / Laden
@@ -87,6 +88,8 @@ def check_fields(r: Recipe) -> list:
         errors.append("Tastaturlayout muss wie de oder us aussehen.")
     if not TZ_RE.match(r.timezone):
         errors.append("Zeitzone muss wie Europe/Berlin aussehen.")
+    if isinstance(r.boot_timeout, bool) or not isinstance(r.boot_timeout, int) or not 0 <= r.boot_timeout <= 300:
+        errors.append("Bootmenü-Wartezeit: eine ganze Zahl von 0 bis 300 Sekunden (0 = auf Eingabe warten).")
     for p in r.extra_packages:
         if not PKG_RE.match(p):
             errors.append(f"Ungültiger Paketname: {p!r}")

@@ -52,6 +52,56 @@ def auto_config(r: Recipe) -> str:
             f"lb config noauto \\\n    {body} \\\n    \"${{@}}\"\n")
 
 
+# Bootmenü-Wartezeit: live-build (Debian 13) lässt das Menü ohne Zeitlimit stehen (GRUB ohne "timeout", isolinux "timeout 0").
+# Darum werden die zwei kleinen Menü-Dateien über includes.binary ersetzt. Inhalt = die Originale aus einer echten
+# Debian-13-Live-ISO (live-build 20250505), nur mit Wartezeit. Der CI-Bau prüft das Ergebnis in der gebauten ISO.
+GRUB_CONFIG_CFG = """set default=0
+set timeout=@SEC@
+
+if [ x$feature_default_font_path = xy ] ; then
+    font=unicode
+else
+    font=$prefix/unicode.pf2
+fi
+
+# Copied from the netinst image
+if loadfont $font ; then
+    set gfxmode=800x600
+    set gfxpayload=keep
+    insmod efi_gop
+    insmod efi_uga
+    insmod video_bochs
+    insmod video_cirrus
+else
+    set gfxmode=auto
+    insmod all_video
+fi
+
+insmod gfxterm
+insmod png
+
+source /boot/grub/theme.cfg
+
+terminal_output gfxterm
+
+insmod play
+play 960 440 1 0 4 440 1
+"""
+
+ISOLINUX_CFG = """include menu.cfg
+default vesamenu.c32
+prompt 0
+timeout @TENTHS@
+"""
+
+
+def boot_timeout_files(r: Recipe) -> dict:
+    if not r.boot_timeout:
+        return {}
+    return {"config/includes.binary/boot/grub/config.cfg": (GRUB_CONFIG_CFG.replace("@SEC@", str(r.boot_timeout)), False),
+            "config/includes.binary/isolinux/isolinux.cfg": (ISOLINUX_CFG.replace("@TENTHS@", str(r.boot_timeout * 10)), False)}
+
+
 AUTO_BUILD = """#!/bin/sh
 set -e
 lb build noauto "${@}" 2>&1 | tee build.log
@@ -141,6 +191,7 @@ def project_files(r: Recipe) -> dict:
             ("# Pakete - erzeugt von " + APP_NAME + "\n" + "\n".join(package_list(r)) + "\n", False),
         "config/includes.chroot/usr/share/doc/baukasten/REZEPT.json": (r.to_json(), False),
     }
+    files.update(boot_timeout_files(r))
     for i in resolve_features(r.features):
         f = FEATURES[i]
         for path, content, executable in f.files:

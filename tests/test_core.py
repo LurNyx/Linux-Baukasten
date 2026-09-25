@@ -219,6 +219,21 @@ def test_generator_option_details():
 
 
 @test
+def test_boot_menu_timeout_files():
+    r = Recipe(boot_timeout=7)
+    files = generator.project_files(r)
+    grub = files["config/includes.binary/boot/grub/config.cfg"][0]
+    iso = files["config/includes.binary/isolinux/isolinux.cfg"][0]
+    assert grub.startswith("set default=0\nset timeout=7\n") and "source /boot/grub/theme.cfg" in grub and "terminal_output gfxterm" in grub
+    assert iso == "include menu.cfg\ndefault vesamenu.c32\nprompt 0\ntimeout 70\n", "isolinux zählt in Zehntelsekunden"
+    assert not [k for k in generator.project_files(Recipe(boot_timeout=0)) if "includes.binary" in k], "0 = Standardverhalten unverändert"
+    for bad in (-1, 301, "5", 2.5, True, None):
+        assert catalog.validate(Recipe(boot_timeout=bad)), bad
+    assert catalog.validate(Recipe(boot_timeout=0)) == [] and catalog.validate(Recipe(boot_timeout=300)) == []
+    assert Recipe.from_json('{"name": "X"}').boot_timeout == 10, "alte Rezepte ohne das Feld bekommen den Standard"
+
+
+@test
 def test_amnesic_watcher_asset_is_valid_python_and_matches_source_project_behaviour():
     import ast
     from baukasten import assets
